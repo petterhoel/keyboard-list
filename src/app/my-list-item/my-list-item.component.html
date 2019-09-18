@@ -1,0 +1,4 @@
+
+<div [ngClass]="{'active': active}">
+    <mat-checkbox #check (change)="emit($event)">{{ fruit }}</mat-checkbox>
+</div>
