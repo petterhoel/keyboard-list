@@ -1,4 +1,4 @@
 
 <div [ngClass]="{'active': active}">
-    <mat-checkbox #check (change)="emit($event)">{{ fruit }}</mat-checkbox>
+    <mat-checkbox #check (change)="emit($event)">{{ item[displayProperty] }}</mat-checkbox>
 </div>

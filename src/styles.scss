@@ -1,4 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
+@include mat-core();
+
+// Include the default theme styles.
+
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+@include angular-material-theme($dark-theme);
+
+@font-face {
+  font-family: 'Starjhol';
+  src: url('assets/fonts/Starjhol.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+html,
+body {
+  height: 100%;
+  background: black;
+  color: aliceblue;
+}
+body {
+  padding-left: 3em;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+h1,
+h3 {
+  letter-spacing: 0.4em;
+  font-family: Starjhol;
+}
+
+h1 {
+  color: #ffd740;;
+}
+
+h3 {
+  color: teal;
+}
+
+li {
+  list-style: none;
+}
+ol {
+  padding: 0;
+}

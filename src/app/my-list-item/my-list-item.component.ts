@@ -13,8 +13,9 @@ import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
   styleUrls: ['./my-list-item.component.scss']
 })
 export class MyListItemComponent implements Highlightable {
-  @Input() fruit: string;
-  @Output() checkChanged = new EventEmitter<{ fruit: string, checked: boolean }>();
+  @Input() item: any;
+  @Input() displayProperty: string;
+  @Output() checkChanged = new EventEmitter<{ item: any, checked: boolean }>();
   @ViewChild('check', { static: false }) check: MatCheckbox;
   active = false;
 
@@ -24,12 +25,8 @@ export class MyListItemComponent implements Highlightable {
   }
 
   emit(event: MatCheckboxChange): void {
-    this.checkChanged.emit({ fruit: this.fruit, checked: event.checked });
+    this.checkChanged.emit({ item: this.item, checked: event.checked });
   }
-  getLabel(): string {
-    return this.fruit;
-  }
-
 
   setActiveStyles(): void {
     this.check.focus();

@@ -1,0 +1,28 @@
+<h1>Starship selector</h1>
+
+<main>
+  <section>
+    <h3>Select your ride</h3>
+    <mat-form-field >
+        <input matInput/>
+        <mat-hint align="start"><strong>Search for ship</strong> </mat-hint>
+    </mat-form-field>
+    <app-my-list>
+      <app-my-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship"
+      *ngFor="let ship of allStarships"></app-my-list-item>
+    </app-my-list>
+  </section>
+  <section>
+    <h3>Selected rides</h3>
+    <ol>
+      <li *ngFor="let ship of selectedStarships">{{ship.name}}></li>
+    </ol>
+  </section>
+  <section>
+      <h3>Fleet</h3>
+      <ol>
+        <li *ngFor="let ship of allStarships">{{ship.name}}</li>
+      </ol>
+  </section>
+
+</main>

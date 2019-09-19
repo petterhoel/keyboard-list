@@ -1,0 +1,11 @@
+main {
+  display: grid;
+  grid-template-columns: 400px 1fr 400px;
+  gap: 10px;
+}
+
+
+mat-form-field {
+  width: 90%;
+  margin-bottom: 10px;
+}
