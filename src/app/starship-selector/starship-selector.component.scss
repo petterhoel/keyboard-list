@@ -1,13 +1,16 @@
 main {
-  display: grid;
-  grid-template-columns: 400px 1fr 400px;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
   grid-template-rows: calc(100vh - 120px);
 }
 
-
 section {
   overflow: auto;
+}
+
+.list {
+  max-height:  calc(100vh - 230px);
+  margin-bottom: 10px;
 }
 
 mat-form-field {
@@ -15,12 +18,3 @@ mat-form-field {
   margin-bottom: 10px;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center
-}
-
-mat-radio-group > * {
-  margin-right: 10px;
-}

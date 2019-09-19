@@ -53,3 +53,20 @@ li {
 ol {
   padding: 0;
 }
+
+
+.boo {
+  background: linear-gradient(to right, #04020f 20%, #ffd740 40%, #ffd740 60%, #04020f 80%);
+  background-size: 200% auto;
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 2s linear infinite;
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+}

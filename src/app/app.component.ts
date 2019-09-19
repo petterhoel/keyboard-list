@@ -7,23 +7,13 @@ import { FocusService } from './focus.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  /**
-   *
-   */
   constructor(private focusService: FocusService) { }
-
 
   @HostListener('document:keydown', ['$event'])
   handle(event: KeyboardEvent) {
     if (event.keyCode !== 115) {
       return;
     }
-    this.triggerFocus();
-
-    }
-
-  triggerFocus(): void {
     this.focusService.announceFocus();
   }
 }

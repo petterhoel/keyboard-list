@@ -1,0 +1,17 @@
+<main>
+  <section>
+      <h3>Complete Fleet</h3>
+      <ol>
+        <li *ngFor="let ship of fleet">{{ship.name}}</li>
+      </ol>
+    </section>
+  <section>
+    <h3>Selected rides</h3>
+    <p *ngIf="!myStarships.length">👾 <span class="boo">Theese are not the ships you are looking for</span>  👾</p>
+    <ol>
+      <li *ngFor="let ship of myStarships">{{ship.name}}</li>
+    </ol>
+    <button *ngIf="!isShopping" mat-flat-button color="accent" (click)="goShopping()">Go shopping 🛸</button>
+  </section>
+  <app-starship-selector *ngIf="isShopping" (selectionChanged)="updateFleet($event)"></app-starship-selector>
+</main>

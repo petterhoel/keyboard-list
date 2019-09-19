@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Starship } from '../../assets/startship';
 import { CheckedItemEvent } from '../checked-item-event';
 import { ENTER, ESCAPE } from '@angular/cdk/keycodes';
+import { SelectionChangeEvent } from './selection-change-event';
 
 @Component({
   selector: 'app-starship-selector',
@@ -10,11 +11,9 @@ import { ENTER, ESCAPE } from '@angular/cdk/keycodes';
   styleUrls: ['./starship-selector.component.scss'],
 })
 export class StarshipSelectorComponent implements OnInit {
-  navType = 'focus';
-  navigationTypes = ['focus', 'activeDecendant'];
   allStarships: Starship[] = [];
   selectedStarships: Starship[] = [];
-  @Output() selectionChange = new EventEmitter<{changeType: 'canceled' | 'newSelection', selection: null | any[]}>()
+  @Output() selectionChanged = new EventEmitter<SelectionChangeEvent>();
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -37,11 +36,11 @@ export class StarshipSelectorComponent implements OnInit {
 
   clear(): void {
     this.selectedStarships = [];
-    this.selectionChange.emit({ changeType: 'canceled', selection: null });
+    this.selectionChanged.emit({ changeType: 'canceled', selection: null });
   }
 
   outputSelection(): void {
-    this.selectionChange.emit({ changeType: 'newSelection', selection: this.selectedStarships });
+    this.selectionChanged.emit({ changeType: 'newSelection', selection: this.selectedStarships });
   }
 
   onCheckChanged(event: CheckedItemEvent): void {

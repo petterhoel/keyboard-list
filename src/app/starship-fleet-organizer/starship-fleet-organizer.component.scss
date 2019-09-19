@@ -1,0 +1,9 @@
+main {
+  display: grid;
+  grid-template-columns: auto 400px 1fr;
+  gap: 30px;
+  grid-template-rows: calc(100vh - 120px);
+}
+
+
+

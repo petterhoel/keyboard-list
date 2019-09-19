@@ -1,45 +1,16 @@
-<header>
-  <h1>Starship selector</h1>
-  <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="navType">
-    <mat-radio-button class="example-radio-button" color="primary" *ngFor="let type of navigationTypes" [value]="type">
-      {{type}}
-    </mat-radio-button>
-  </mat-radio-group>
-</header>
-
-
 <main>
-  <section *ngIf="navType === 'focus'">
-    <h3>Select your rides</h3>
+  <header>
+    <h3>Commander make your pick - f4</h3>
+  </header>
+  <section class="list">
     <app-focus-list>
       <app-focus-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship"
         *ngFor="let ship of allStarships">
       </app-focus-list-item>
     </app-focus-list>
   </section>
-  <section *ngIf="navType !== 'focus'">
-    <h3>Select your rides</h3>
-    <mat-form-field>
-      <input matInput />
-      <mat-hint align="start"><strong>Search for ship</strong> </mat-hint>
-    </mat-form-field>
-    <app-my-list>
-      <app-my-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship"
-        *ngFor="let ship of allStarships"></app-my-list-item>
-    </app-my-list>
-  </section>
   <section>
-    <h3>Selected rides</h3>
-    <ol>
-      <li *ngFor="let ship of selectedStarships">{{ship.name}}</li>
-    </ol>
-    <button mat-flat-button style="margin-right: 10px" color="accent" (click)="outputSelection()">Use rides</button>
-    <button mat-flat-button color="warn" (click)="clear()">Cancel</button>
-  </section>
-  <section>
-    <h3>Complete Fleet</h3>
-    <ol>
-      <li *ngFor="let ship of allStarships">{{ship.name}}</li>
-    </ol>
+    <button mat-flat-button style="margin-right: 10px" color="accent" (click)="outputSelection()">Use rides (enter)</button>
+    <button mat-flat-button color="warn" (click)="clear()">Cancel (esc)</button>
   </section>
 </main>

@@ -16,6 +16,7 @@ import { StarshipSelectorComponent } from './starship-selector/starship-selector
 import { FocusListComponent } from './focus-list/focus-list.component';
 import { FocusListItemComponent } from './focus-list-item/focus-list-item.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { StarshipFleetOrganizerComponent } from './starship-fleet-organizer/starship-fleet-organizer.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MyListComponent,
     StarshipSelectorComponent,
     FocusListComponent,
-    FocusListItemComponent
+    FocusListItemComponent,
+    StarshipFleetOrganizerComponent
   ],
   imports: [
     BrowserModule,
