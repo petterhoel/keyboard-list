@@ -4,7 +4,10 @@
   </header>
   <section class="list">
     <app-focus-list>
-      <app-focus-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship"
+      <app-focus-list-item
+        [selected]="inSelectedItems(ship)"
+        (checkChanged)="onCheckChanged($event)"
+        [displayProperty]="'name'" [item]="ship"
         *ngFor="let ship of allStarships">
       </app-focus-list-item>
     </app-focus-list>

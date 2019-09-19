@@ -1,3 +1,1 @@
-<div [ngClass]="{'active': active}">
-    <mat-checkbox #check (change)="emit($event)">{{ item[displayProperty] }}</mat-checkbox>
-</div>
+<mat-checkbox #check (change)="emit($event)" [(ngModel)]="selected">{{ item[displayProperty] }}</mat-checkbox>

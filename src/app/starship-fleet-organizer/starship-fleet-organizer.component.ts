@@ -23,6 +23,8 @@ export class StarshipFleetOrganizerComponent implements OnInit {
   }
 
   updateFleet(selectionChange: SelectionChangeEvent): void {
+    console.log(selectionChange);
+
     if (selectionChange.changeType === 'newSelection') {
       this.myStarships = selectionChange.selection;
     }

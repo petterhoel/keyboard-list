@@ -11,6 +11,7 @@ import { FocusableOption, FocusOrigin } from '@angular/cdk/a11y';
 export class FocusListItemComponent implements FocusableOption {
 
   @Input() item: any;
+  @Input() selected: boolean;
   @Input() displayProperty: string;
   @Output() checkChanged = new EventEmitter<CheckedItemEvent>();
   disabled?: boolean;
@@ -24,10 +25,8 @@ export class FocusListItemComponent implements FocusableOption {
     return this.item[this.displayProperty];
   }
 
-
-
-
   emit(event: MatCheckboxChange): void {
+    this.selected = event.checked;
     this.checkChanged.emit({ item: this.item, checked: event.checked });
   }
 }
