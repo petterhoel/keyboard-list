@@ -33,7 +33,8 @@
     <ol>
       <li *ngFor="let ship of selectedStarships">{{ship.name}}</li>
     </ol>
-    <button mat-flat-button color="warn" (click)="clear()">Clear rides</button>
+    <button mat-flat-button style="margin-right: 10px" color="accent" (click)="outputSelection()">Use rides</button>
+    <button mat-flat-button color="warn" (click)="clear()">Cancel</button>
   </section>
   <section>
     <h3>Complete Fleet</h3>
@@ -41,5 +42,4 @@
       <li *ngFor="let ship of allStarships">{{ship.name}}</li>
     </ol>
   </section>
-
 </main>

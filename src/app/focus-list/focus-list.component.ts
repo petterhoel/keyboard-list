@@ -1,7 +1,9 @@
-import { Component, OnInit, AfterContentInit, ContentChildren, QueryList, HostListener } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ContentChildren, QueryList, HostListener, AfterViewInit } from '@angular/core';
 import { FocusListItemComponent } from '../focus-list-item/focus-list-item.component';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { FocusService } from '../focus.service';
+import {TAB, ENTER, ESCAPE} from '@angular/cdk/keycodes';
+
 
 @Component({
   selector: 'app-focus-list',
@@ -9,8 +11,6 @@ import { FocusService } from '../focus.service';
   styleUrls: ['./focus-list.component.scss']
 })
 export class FocusListComponent implements OnInit,  AfterContentInit {
-
-
   @ContentChildren(FocusListItemComponent)
   items: QueryList<FocusListItemComponent>;
 
@@ -18,7 +18,25 @@ export class FocusListComponent implements OnInit,  AfterContentInit {
 
 
   @HostListener('keydown', ['$event'])
-  manage(event: KeyboardEvent) {
+  manage(event: KeyboardEvent): void {
+
+    // tslint:disable: deprecation
+    if (event.keyCode === TAB) {
+      event.preventDefault();
+      console.log('TAB');
+      return;
+    }
+    if (event.keyCode === ENTER) {
+      console.log('ENTER');
+      return;
+    }
+
+    if (event.keyCode === ESCAPE) {
+      console.log('ESCAPE');
+      return;
+    }
+
+
     this.keyManager.onKeydown(event);
   }
   constructor(private focusService: FocusService) { }
@@ -28,7 +46,6 @@ export class FocusListComponent implements OnInit,  AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-
     this.keyManager = new FocusKeyManager(this.items).withWrap();
   }
 

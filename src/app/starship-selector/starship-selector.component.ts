@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Starship } from '../../assets/startship';
 import { CheckedItemEvent } from '../checked-item-event';
+import { ENTER, ESCAPE } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-starship-selector',
@@ -13,6 +14,7 @@ export class StarshipSelectorComponent implements OnInit {
   navigationTypes = ['focus', 'activeDecendant'];
   allStarships: Starship[] = [];
   selectedStarships: Starship[] = [];
+  @Output() selectionChange = new EventEmitter<{changeType: 'canceled' | 'newSelection', selection: null | any[]}>()
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -20,12 +22,26 @@ export class StarshipSelectorComponent implements OnInit {
       .subscribe(ships => this.allStarships = ships);
   }
 
-  clear(): void {
-    if (!this.selectedStarships.length) {
-      alert('No rides to clear...:/');
+  @HostListener('keydown', ['$event'])
+  manage(event: KeyboardEvent): void {
+    if (event.keyCode === ENTER) {
+      this.outputSelection();
       return;
     }
+
+    if (event.keyCode === ESCAPE) {
+      this.clear();
+      return;
+    }
+  }
+
+  clear(): void {
     this.selectedStarships = [];
+    this.selectionChange.emit({ changeType: 'canceled', selection: null });
+  }
+
+  outputSelection(): void {
+    this.selectionChange.emit({ changeType: 'newSelection', selection: this.selectedStarships });
   }
 
   onCheckChanged(event: CheckedItemEvent): void {

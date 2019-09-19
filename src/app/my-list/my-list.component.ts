@@ -19,13 +19,10 @@ export class MyListComponent implements OnInit, AfterContentInit {
   private keyManager: ActiveDescendantKeyManager<MyListItemComponent>;
 
   @HostListener('keydown', ['$event'])
-  manage(event) {
+  manage(event: KeyboardEvent) {
     this.keyManager.onKeydown(event);
   }
 
-  /**
-   *
-   */
   constructor(private focusService: FocusService) { }
 
   ngOnInit(): void {
