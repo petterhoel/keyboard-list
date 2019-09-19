@@ -2,8 +2,13 @@ main {
   display: grid;
   grid-template-columns: 400px 1fr 400px;
   gap: 10px;
+  grid-template-rows: calc(100vh - 120px);
 }
 
+
+section {
+  overflow: auto;
+}
 
 mat-form-field {
   width: 90%;
