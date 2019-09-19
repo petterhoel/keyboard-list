@@ -38,6 +38,8 @@ export class FocusListComponent implements OnInit,  AfterContentInit {
 
 
     this.keyManager.onKeydown(event);
+    // TODO: theres got to be a better way
+    this.keyManager.activeItem.check._elementRef.nativeElement.scrollIntoView();
   }
   constructor(private focusService: FocusService) { }
 
@@ -47,10 +49,13 @@ export class FocusListComponent implements OnInit,  AfterContentInit {
 
   ngAfterContentInit(): void {
     this.keyManager = new FocusKeyManager(this.items).withWrap();
+    this.focusFirst();
   }
 
   focusFirst(): void {
-    this.keyManager.setFirstItemActive()
+    this.keyManager.setFirstItemActive();
+    // TODO: theres got to be a better way
+    this.keyManager.activeItem.check._elementRef.nativeElement.scrollIntoView();
   }
 }
 
