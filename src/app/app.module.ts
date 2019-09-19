@@ -7,23 +7,31 @@ import { MyListItemComponent } from './my-list-item/my-list-item.component';
 import { MyListComponent } from './my-list/my-list.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { StarshipSelectorComponent } from './starship-selector/starship-selector.component';
+import { FocusListComponent } from './focus-list/focus-list.component';
+import { FocusListItemComponent } from './focus-list-item/focus-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyListItemComponent,
     MyListComponent,
-    StarshipSelectorComponent
+    StarshipSelectorComponent,
+    FocusListComponent,
+    FocusListItemComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    MatButtonModule,
     ReactiveFormsModule,
+    MatSlideToggleModule,
     MatInputModule,
     AppRoutingModule,
     NoopAnimationsModule,

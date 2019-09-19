@@ -9,7 +9,7 @@ import { CheckedItemEvent } from '../checked-item-event';
   styleUrls: ['./starship-selector.component.scss'],
 })
 export class StarshipSelectorComponent implements OnInit {
-
+  activeDecendant = false;
   allStarships: Starship[] = [];
   selectedStarships: Starship[] = [];
   constructor(private http: HttpClient) { }
@@ -17,6 +17,14 @@ export class StarshipSelectorComponent implements OnInit {
   ngOnInit() {
     this.http.get<Starship[]>('/assets/starships.json')
       .subscribe(ships => this.allStarships = ships);
+  }
+
+  clear(): void {
+    if (!this.selectedStarships.length) {
+      alert('No rides to clear...:/');
+      return;
+    }
+    this.selectedStarships = [];
   }
 
   onCheckChanged(event: CheckedItemEvent): void {

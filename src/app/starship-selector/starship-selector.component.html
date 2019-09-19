@@ -1,15 +1,26 @@
-<h1>Starship selector</h1>
+<header>
+  <h1>Starship selector</h1>
+  <mat-checkbox [(ngModel)]="activeDecendant"> {{ activeDecendant ? 'activeD' : 'focus'}} </mat-checkbox>
+</header>
+
 
 <main>
-  <section>
-    <h3>Select your ride</h3>
+  <section *ngIf="!activeDecendant">
+    <h3>Select your rides</h3>
+    <app-focus-list>
+      <app-focus-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship" *ngFor="let ship of allStarships">
+
+      </app-focus-list-item>
+    </app-focus-list>
+  </section>
+  <section *ngIf="activeDecendant">
+    <h3>Select your rides</h3>
     <mat-form-field >
         <input matInput/>
         <mat-hint align="start"><strong>Search for ship</strong> </mat-hint>
     </mat-form-field>
     <app-my-list>
-      <app-my-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship"
-      *ngFor="let ship of allStarships"></app-my-list-item>
+      <app-my-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship" *ngFor="let ship of allStarships"></app-my-list-item>
     </app-my-list>
   </section>
   <section>
@@ -17,6 +28,7 @@
     <ol>
       <li *ngFor="let ship of selectedStarships">{{ship.name}}</li>
     </ol>
+    <button mat-flat-button color="warn" (click)="clear()">Clear rides</button>
   </section>
   <section>
       <h3>Fleet</h3>

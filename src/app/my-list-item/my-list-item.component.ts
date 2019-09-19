@@ -1,6 +1,7 @@
 import { Component, Input, ElementRef, ViewChildren, ViewChild, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
 import { FocusableOption, Highlightable } from '@angular/cdk/a11y';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { CheckedItemEvent } from '../checked-item-event';
 
 @Component({
   selector: 'app-my-list-item',
@@ -15,7 +16,7 @@ import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 export class MyListItemComponent implements Highlightable {
   @Input() item: any;
   @Input() displayProperty: string;
-  @Output() checkChanged = new EventEmitter<{ item: any, checked: boolean }>();
+  @Output() checkChanged = new EventEmitter<CheckedItemEvent>();
   @ViewChild('check', { static: false }) check: MatCheckbox;
   active = false;
 

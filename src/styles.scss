@@ -24,12 +24,12 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 html,
 body {
-  background: black;
+  background: #04020f;
   color: aliceblue;
   box-sizing: content-box;
 }
 body {
-  padding-left: 3em;
+  padding: 0 2em;
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
