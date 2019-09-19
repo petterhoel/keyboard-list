@@ -1,6 +1,7 @@
-import { Component, AfterContentInit, ContentChildren, QueryList, HostListener } from '@angular/core';
+import { Component, AfterContentInit, ContentChildren, QueryList, HostListener, OnInit } from '@angular/core';
 import { FocusKeyManager, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { MyListItemComponent } from '../my-list-item/my-list-item.component';
+import { FocusService } from '../focus.service';
 
 @Component({
   selector: 'app-my-list',
@@ -9,7 +10,7 @@ import { MyListItemComponent } from '../my-list-item/my-list-item.component';
   templateUrl: './my-list.component.html',
   styleUrls: ['./my-list.component.scss']
 })
-export class MyListComponent implements AfterContentInit {
+export class MyListComponent implements OnInit, AfterContentInit {
   // 1. Query all child elements
   @ContentChildren(MyListItemComponent, { descendants: true })
   items: QueryList<MyListItemComponent>;
@@ -22,9 +23,20 @@ export class MyListComponent implements AfterContentInit {
     this.keyManager.onKeydown(event);
   }
 
+  /**
+   *
+   */
+  constructor(private focusService: FocusService) { }
+
+  ngOnInit(): void {
+    this.focusService.focusEvent$.subscribe(() => this.focusFirst())
+  }
+
   ngAfterContentInit(): void {
-
     this.keyManager = new ActiveDescendantKeyManager(this.items).withWrap();
+  }
 
+  focusFirst(): void {
+    this.keyManager.setFirstItemActive();
   }
 }
