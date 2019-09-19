@@ -22,13 +22,13 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   src: url('assets/fonts/Starjhol.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
-html,
+
 body {
+  scrollbar-color: #04020f #1c2431;
+  scrollbar-width: thin;
   background: #04020f;
   color: aliceblue;
   box-sizing: content-box;
-}
-body {
   padding: 0 2em;
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;

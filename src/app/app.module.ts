@@ -15,6 +15,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { StarshipSelectorComponent } from './starship-selector/starship-selector.component';
 import { FocusListComponent } from './focus-list/focus-list.component';
 import { FocusListItemComponent } from './focus-list-item/focus-list-item.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { FocusListItemComponent } from './focus-list-item/focus-list-item.compon
     MatButtonModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
+    MatRadioModule,
     MatInputModule,
     AppRoutingModule,
     NoopAnimationsModule,

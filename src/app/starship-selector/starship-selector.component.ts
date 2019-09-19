@@ -9,7 +9,8 @@ import { CheckedItemEvent } from '../checked-item-event';
   styleUrls: ['./starship-selector.component.scss'],
 })
 export class StarshipSelectorComponent implements OnInit {
-  activeDecendant = false;
+  navType = 'focus';
+  navigationTypes = ['focus', 'activeDecendant'];
   allStarships: Starship[] = [];
   selectedStarships: Starship[] = [];
   constructor(private http: HttpClient) { }

@@ -1,26 +1,32 @@
 <header>
   <h1>Starship selector</h1>
-  <mat-checkbox [(ngModel)]="activeDecendant"> {{ activeDecendant ? 'activeD' : 'focus'}} </mat-checkbox>
+  <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="navType">
+    <mat-radio-button class="example-radio-button" color="primary" *ngFor="let type of navigationTypes" [value]="type">
+      {{type}}
+    </mat-radio-button>
+  </mat-radio-group>
 </header>
 
 
 <main>
-  <section *ngIf="!activeDecendant">
+  <section *ngIf="navType === 'focus'">
     <h3>Select your rides</h3>
     <app-focus-list>
-      <app-focus-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship" *ngFor="let ship of allStarships">
+      <app-focus-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship"
+        *ngFor="let ship of allStarships">
 
       </app-focus-list-item>
     </app-focus-list>
   </section>
-  <section *ngIf="activeDecendant">
+  <section *ngIf="navType !== 'focus'">
     <h3>Select your rides</h3>
-    <mat-form-field >
-        <input matInput/>
-        <mat-hint align="start"><strong>Search for ship</strong> </mat-hint>
+    <mat-form-field>
+      <input matInput />
+      <mat-hint align="start"><strong>Search for ship</strong> </mat-hint>
     </mat-form-field>
     <app-my-list>
-      <app-my-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship" *ngFor="let ship of allStarships"></app-my-list-item>
+      <app-my-list-item (checkChanged)="onCheckChanged($event)" [displayProperty]="'name'" [item]="ship"
+        *ngFor="let ship of allStarships"></app-my-list-item>
     </app-my-list>
   </section>
   <section>
@@ -31,10 +37,10 @@
     <button mat-flat-button color="warn" (click)="clear()">Clear rides</button>
   </section>
   <section>
-      <h3>Fleet</h3>
-      <ol>
-        <li *ngFor="let ship of allStarships">{{ship.name}}</li>
-      </ol>
+    <h3>Complete Fleet</h3>
+    <ol>
+      <li *ngFor="let ship of allStarships">{{ship.name}}</li>
+    </ol>
   </section>
 
 </main>
