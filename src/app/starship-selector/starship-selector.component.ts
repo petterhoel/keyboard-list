@@ -1,8 +1,10 @@
-import { Component,  Output, EventEmitter, HostListener, Input } from '@angular/core';
+import { Component,  Output, EventEmitter, HostListener, Input, ViewChild, ElementRef } from '@angular/core';
 import { Starship } from '../../assets/startship';
 import { CheckedItemEvent } from '../checked-item-event';
 import { ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { SelectionChangeEvent } from './selection-change-event';
+import { fromEvent } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-starship-selector',
@@ -10,8 +12,17 @@ import { SelectionChangeEvent } from './selection-change-event';
   styleUrls: ['./starship-selector.component.scss'],
 })
 export class StarshipSelectorComponent {
-  @Input() allStarships: Starship[] = [];
+  @Input() set allStarships(ships: Starship[]) {
+    this._filteredStarShips = ships;
+    this.originalShips = ships.map(ship => ship);
+  }
+
+  get allStarships(): Starship[] {
+    return this._filteredStarShips;
+  }
   // tslint:disable-next-line:variable-name
+  private originalShips: Starship[] = [];
+  _filteredStarShips: Starship[] = [];
   _selectedStarShips: Starship[] = [];
   @Input() set selectedStarships(ships: Starship[]) {
     this._selectedStarShips = ships.map(ship => ship);
@@ -21,6 +32,7 @@ export class StarshipSelectorComponent {
   }
   @Output() selectionChanged = new EventEmitter<SelectionChangeEvent>();
 
+  @ViewChild('search', {static: false}) searchQuery: ElementRef;
 
   @HostListener('keydown', ['$event'])
   manage(event: KeyboardEvent): void {
@@ -33,6 +45,28 @@ export class StarshipSelectorComponent {
       this.clear();
       return;
     }
+  }
+  /**
+   *
+   */
+  ngAfterViewInit(): void {
+    fromEvent(this.searchQuery.nativeElement, 'keyup')
+      .pipe(
+        map((event: any) => {
+          return event.target.value;
+        })
+        // Time in milliseconds between key events
+        , debounceTime(100)
+        // If previous query is diffent from current
+        , distinctUntilChanged()
+        // subscription for response
+      ).subscribe(query => this.filterByQuery(query));
+  }
+
+
+  private filterByQuery(query: string): void {
+    this._filteredStarShips = this.originalShips.filter(ship => ship['name'].toLocaleLowerCase().includes(query.toLocaleLowerCase())).map(ship => ship);
+
   }
 
   clear(): void {

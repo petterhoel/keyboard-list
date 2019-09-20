@@ -1,7 +1,11 @@
-<main>
+<main (keydown.f8)="search.focus()">
   <header>
     <h3>Commander make your pick - f4</h3>
   </header>
+  <mat-form-field >
+      <input matInput #search>
+      <mat-hint>f8 to search</mat-hint>
+  </mat-form-field>
   <section class="list">
     <app-focus-list>
       <app-focus-list-item
